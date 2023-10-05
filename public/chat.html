@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <title>Chat</title>
+</head>
+
+<body>
+    <section style="background-color: #eee; height: 100vh;">
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-5">
+                    <div class="card" id="chat1" style="border-radius: 15px; height: 700px;">
+                        <div class="card-header d-flex flex-column justify-content-center align-items-center pt-3 pb-1 bg-primary text-white border-bottom-0"
+                                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                            <p class="mb-0 fw-bold">Global Chat</p>
+                            <p>Hello: <span id="username"></span>!</p>
+                        </div>
+                        <!-- Chat Container -->
+                        <div id="chat-display-container" class="card-body" style="height: 700px; overflow-y: auto;">
+                            <!-- Chat Messages -->
+                        </div>
+                        <div class="form-outline px-2 py-4 d-flex flex-column">
+                            <textarea id="message-box" class="form-control" rows="4" placeholder="Type your message"></textarea>
+                            <button id="btn-send" class="btn btn-primary mt-3 py-2 w-100">Send</button>
+                            <button id="btn-logout" class="btn btn-outline-secondary mt-3 py-2 w-100">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Scripts -->
+    <script src="./src/js/bootstrap.bundle.min.js"></script>
+    <script src="./src/js/app.js"></script>
+    <script src="./src/js/apiFetch.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
+    <script src="./src/js/chat.js"></script>
+</body>
+
+</html>
