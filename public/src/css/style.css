@@ -1,7 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-#test{
-    color: red;
+html,
+body{
+    background: #eee;
 }

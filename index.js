@@ -64,6 +64,14 @@ io.on('connection', (socket) => {
     console.log('A user connected');
 
     socket.on("chat message", (message) => {
+
+        const insertMsgQuery = "INSERT INTO message(user_id, message) VALUES(?,?)";
+        db.query(insertMsgQuery, [userID, message], (err, result) => {
+            if (!err) {
+                return io.emit(result);
+            }
+        })
+
         io.emit("chat message", { message, userID: userID });
     });
 
@@ -112,7 +120,7 @@ app.post('/api/register', (req, res) => {
                     message: 'Registered successfully!',
                 });
             });
-        });
+        });q
     });
 });
 
@@ -186,9 +194,25 @@ app.get('/api/userInfo', verifyToken, (req, res) => {
             return res.status(500).json({ message: 'Server error' });
         }
 
-        res.json({
+        return res.json({
             status: 'success',
             data: results,
+        });
+    });
+});
+
+app.get('/api/convo', (req, res) => {
+    const selectConvoSQL = "SELECT user_id, message FROM message";
+
+    db.query(selectConvoSQL, (err, result) => {
+        if (err) {
+            console.error('Error fetching data:', err);
+            return res.status(500).json({ message: 'Server error' });
+        }
+
+        return res.json({
+            status: 'success',
+            data: result,
         });
     });
 });
