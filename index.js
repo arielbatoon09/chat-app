@@ -54,8 +54,8 @@ app.get('/chat', (req, res) => {
 });
 
 // Socket Connection
-server.listen(3000, () => {
-    console.log('Server is running on port 3000');
+server.listen(4000, () => {
+    console.log('Server is running on port 4000');
 });
 
 io.on('connection', (socket) => {
@@ -63,16 +63,16 @@ io.on('connection', (socket) => {
 
     console.log('A user connected');
 
-    socket.on("chat message", (message) => {
+    socket.on("chat message", (message, loggedUserID) => {
 
         const insertMsgQuery = "INSERT INTO message(user_id, message) VALUES(?,?)";
-        db.query(insertMsgQuery, [userID, message], (err, result) => {
+        db.query(insertMsgQuery, [loggedUserID, message], (err, result) => {
             if (!err) {
                 return io.emit(result);
             }
         })
 
-        io.emit("chat message", { message, userID: userID });
+        io.emit("chat message", { message, userID: loggedUserID });
     });
 
     socket.on("disconnect", () => {
@@ -120,7 +120,7 @@ app.post('/api/register', (req, res) => {
                     message: 'Registered successfully!',
                 });
             });
-        });q
+        });
     });
 });
 
@@ -201,7 +201,7 @@ app.get('/api/userInfo', verifyToken, (req, res) => {
     });
 });
 
-app.get('/api/convo', (req, res) => {
+app.get('/api/convo', verifyToken, (req, res) => {
     const selectConvoSQL = "SELECT user_id, message FROM message";
 
     db.query(selectConvoSQL, (err, result) => {

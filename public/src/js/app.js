@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 const PostRegister = async(username, password) => {
     try {
-        let url = 'http://127.0.0.1:3000/api/register';
+        let url = 'http://127.0.0.1:4000/api/register';
         const FormData = ({
             username: username,
             password: password,
@@ -43,7 +43,7 @@ const PostRegister = async(username, password) => {
 
 const HandleLogin = async(username, password) => {
     try {
-        let url = 'http://127.0.0.1:3000/api/login';
+        let url = 'http://127.0.0.1:4000/api/login';
         const FormData = ({
             username: username,
             password: password,
@@ -62,7 +62,7 @@ const HandleLogin = async(username, password) => {
 
 const HandleLogout = async() => {
     try {
-        let url = 'http://127.0.0.1:3000/api/logout';
+        let url = 'http://127.0.0.1:4000/api/logout';
         const response = await Fetch.get(url);
         
         console.log(response);
